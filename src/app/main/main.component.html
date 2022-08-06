@@ -1,0 +1,276 @@
+<app-toolbar [showToolbar]="showToolbar" (togleSideNavOut)="togleSideNav()"></app-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav class="w-100 bg-white" #sidenav mode="side">
+        <app-sidebar [showToolbar]="showToolbar"></app-sidebar>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+        <h1 class="text-center mt-5 mb-5"><b> Contracts for {{ client.name }}</b></h1>
+        <div class="container container-mw" [ngClass]="{'d-none':sidenav.opened}">
+            <!-- Filter Search -->
+            <div class="row  align-items-center">
+                <div class="col-md-8 col-12 align-self-center  height-input ">
+                    <mat-form-field [formGroup]="formFilterData" appearance="outline" class="w-100">
+                        <input #inputsearch formControlName="search" matInput placeholder="Search" />
+                        <i matPrefix class="material-icons font-options-avatar search-input ">search</i>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-2 p-1 mt-3 mt-md-0 align-self-center button-left"
+                    [ngStyle]="{'margin-left': showDiv ? '1vw': '0vw'}">
+                    <button (click)="applyFilter(inputsearch.value)" mat-flat-button class="w-100 h-100 button-grey"><i
+                            class="material-icons position-icon">filter_list</i> Filter</button>
+                </div>
+                <div class="col" *ngIf="showDiv"></div>
+                <div class="col-md-2 button-right p-1 mt-3 mt-md-0 align-self-center"
+                    [ngStyle]="{'margin-right': showDiv ? '1vw': '0vw'}">
+                    <button mat-raised-button color="primary" class="w-100 h-100  mat-elevation-z4"><i
+                            class="material-icons position-icon">add</i> New Hire</button>
+                </div>
+            </div>
+
+            <!-- Filter Multiple -->
+            <div class="row  align-items-center mt-4">
+                <div class="col-md-4 col-10 mx-auto align-self-center filters-input-bg font-10">
+                    <mat-form-field role="button" appearance="outline" class="w-100 " (click)="picker.open()">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="color-filters">Created on:</span>
+                            </div>
+                            <div class="col">
+                                <mat-date-range-input class="color-filters" [formGroup]="formFilterData"
+                                    [rangePicker]="picker">
+                                    <input matStartDate (keypress)="keyPressNumbers($event)" formControlName="start"
+                                        placeholder="Start date">
+                                    <input matEndDate (keypress)="keyPressNumbers($event)" formControlName="end"
+                                        placeholder="End date">
+                                </mat-date-range-input>
+                            </div>
+                        </div>
+                        <i class="material-icons color-filters font-15 calendar-today" matPrefix
+                            matSuffix>calendar_today</i>
+
+                        <i class="material-icons color-filters poistion-icon-new" matSuffix>keyboard_arrow_down</i>
+                        <mat-date-range-picker #picker>
+                            <mat-date-range-picker-actions>
+                                <button (click)="setDates()" mat-button matDateRangePickerCancel>
+                                    Limpiar
+                                </button>
+                                <button mat-raised-button color="primary" matDateRangePickerApply>
+                                    Aplicar
+                                </button>
+                            </mat-date-range-picker-actions>
+                        </mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-2 col-10 mx-auto align-self-center filters-input-bg font-10">
+
+                    <mat-form-field [formGroup]="formFilterData" appearance="outline" class="w-100">
+
+                        <mat-select class="color-filters pal-5" name="food" formControlName="type">
+
+                            <mat-option value="" class="text-center">
+                                <span>Contract type</span>
+                            </mat-option>
+                            <mat-option *ngFor="let item of arrayContractType" value="{{ item }}" class="text-center">
+                                {{item}}
+                            </mat-option>
+
+                        </mat-select>
+
+                        <i class="material-icons color-filters poistion-icon-new" matSuffix>keyboard_arrow_down</i>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-10 mx-auto align-self-center filters-input-bg font-10">
+                    <mat-form-field [formGroup]="formFilterData" appearance="outline" class="w-100">
+                        <input class="color-filters pal-5" matInput formControlName="name"
+                            placeholder="Contractor Name" />
+
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2 col-10 mx-auto align-self-center filters-input-bg font-10">
+                    <mat-form-field [formGroup]="formFilterData" appearance="outline" class="w-100">
+
+                        <mat-select class="color-filters pal-5" name="food" formControlName="status">
+                            <mat-option value="" class="text-center">
+                                Status
+                            </mat-option>
+                            <mat-option *ngFor="let item of arraystatus" value="{{ item }}" class="text-center">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
+
+                        <i class="material-icons color-filters poistion-icon-new" matSuffix>keyboard_arrow_down</i>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="col-10 mx-auto text-end 	d-block d-md-none">
+                    <div role="button" class="color-primary" (click)="clearFilters()">
+                        <span class="float-right"><i
+                                class="material-icons posisiton-new-iconmew">delete_outline</i>Clear filters</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class=" mt-4 mb-4" [ngClass]="{'mat-elevation-z2':!cardTable}">
+                <mat-table [dataSource]="dataSource" matSort matTableResponsive>
+                    <ngSSS-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Contractor name </mat-header-cell>
+                        <mat-cell *matCellDef="let row" data-label="Contractor name">
+
+                            <div class="row">
+                                <div [ngClass]="{'col-8':cardTable}"
+                                    [ngStyle]="{'margin-left': cardTable ? '7%': '0%'}">
+                                    <span>
+                                        <img *ngIf="!cardTable" src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                            class="rounded-circle avatar-to" alt="Avatar" />
+                                        {{row.name}}</span>
+
+                                </div>
+
+                            </div>
+                        </mat-cell>
+                    </ngSSS-container>
+
+
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                        <mat-cell *matCellDef="let row" data-label="Type">
+                            <div class="row">
+                                <div [ngClass]="{'col-8':cardTable}"
+                                    [ngStyle]="{'margin-left': cardTable ? '42px': '0%'}">
+                                    <span>
+                                        {{row.type}} </span>
+                                </div>
+
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Start date </mat-header-cell>
+                        <mat-cell *matCellDef="let row" data-label="Start date ">
+
+                            <div class="row">
+                                <div [ngClass]="{'col-8':cardTable}"
+                                    [ngStyle]="{'margin-left': cardTable ? '35px': '0%'}">
+                                    <span>
+                                        {{row.date | date}} </span>
+                                </div>
+
+                            </div>
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="Amount">
+
+
+
+                            <div class="row">
+                                <div [ngClass]="{'col-8':cardTable}">
+                                    <span>
+                                        {{row.amount}} </span>
+                                </div>
+
+                            </div>
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="Status">
+
+                            <div class="row" [ngStyle]="{'margin-left': cardTable ? '55%': '0%'}">
+                                <div class="col-6 col-md-12">
+                                    <ul class="baged-label" [ngStyle]="{'width': cardTable ? '110px':'140px'}"
+                                        [ngClass]="{'sucess-baged':row.status==='Active','pending-baged':row.status==='Pending'}">
+                                        <li class="text-start"><span> {{row.status}}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="Actions">
+
+                            <button *ngIf="!cardTable" mat-icon-button [mat-menu-trigger-for]="actionsMenu"
+                                [matMenuTriggerData]="{element:row}">
+                                <i class="material-icons m-icon">more_vert</i>
+                            </button>
+
+
+                            <i class="material-icons m-icon par-icon-ext " role="button" mat-icon-button
+                                [mat-menu-trigger-for]="actionsMenu" [matMenuTriggerData]="{element:row}"
+                                *ngIf="cardTable">more_horiz</i>
+
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+            </div>
+
+            <mat-menu #actionsMenu="matMenu" yPosition="below" xPosition="after">
+                <ng-template matMenuContent let-element="element">
+                    <div class=" border-bottom color-filters mar-action-content-button"><button mat-menu-item>
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                    <div class=" border-bottom color-filters mar-action-content-button"><button mat-menu-item>
+                            <mat-icon>gesture</mat-icon>
+                            <span>Sign</span>
+                        </button>
+                    </div>
+                    <div class=" border-bottom color-filters mar-action-content-button"><button mat-menu-item>
+                            <mat-icon>file_copy</mat-icon>
+                            <span>View Summary</span>
+                        </button>
+                    </div>
+                    <div class=" border-bottom color-filters mar-action-content-button"><button mat-menu-item>
+                            <mat-icon class="text-danger">delete_outline</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </ng-template>
+            </mat-menu>
+
+            <div role="button" class="fab">
+                <mat-icon class="position-icon-fab">chat</mat-icon>
+            </div>
+
+        </div>
+
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

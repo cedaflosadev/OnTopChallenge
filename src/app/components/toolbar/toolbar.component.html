@@ -1,0 +1,93 @@
+<mat-toolbar class="shadow-sm bg-white text-secondary d-flex flex-row p-5 text-center ">
+    <div class="d-flex " [ngClass]="{'flex-grow-1':!showToolbar}">
+        <img *ngIf="showToolbar" src="../assets/img/toolbar/logo.svg" alt="logo">
+        <img *ngIf="!showToolbar" src="../assets/img/toolbar/logo.svg" alt="logo" width='100px'>
+    </div>
+
+    <wMat-menu-group class="d-flex flex-row justify-content-around mx-auto text-center" *ngIf="showToolbar">
+        <div role="button" [matMenuTriggerFor]="aboveMenu" #abovemenuTrigger="matMenuTrigger"
+            [ngClass]="{'active':abovemenuTrigger.menuOpen}" class=" hover-toolbar">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <i class="material-icons font-options-toolbar">person_outline</i>
+                <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Contracts</span>
+                <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+                <mat-menu #aboveMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+                    <button mat-menu-item>Resumen</button>
+                    <button mat-menu-item>Agregar</button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="belowMenu" #belowMenuTrigger="matMenuTrigger"
+            [ngClass]="{'active':belowMenuTrigger.menuOpen}" class=" hover-toolbar">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <i class="material-icons font-options-toolbar">person_outline</i>
+                <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Documents</span>
+                <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+            </div>
+            <mat-menu #belowMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+                <button mat-menu-item>Resumen</button>
+                <button mat-menu-item>Agregar</button>
+            </mat-menu>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="beforeMenu" #beforeMenuTrigger="matMenuTrigger"
+            [ngClass]="{'active':beforeMenuTrigger.menuOpen}" class=" hover-toolbar">
+            <div class="d-flex flex-row justify-content-center  align-items-center">
+                <i class="material-icons font-options-toolbar">person_outline</i>
+                <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Payout</span>
+                <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+            </div>
+            <mat-menu #beforeMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+                <button mat-menu-item>Resumen</button>
+                <button mat-menu-item>Agregar</button>
+            </mat-menu>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="afterMenu" #afterMenuTrigger="matMenuTrigger"
+            [ngClass]="{'active':afterMenuTrigger.menuOpen}" class=" hover-toolbar">
+            <div class="d-flex flex-row justify-content-center  align-items-center">
+                <i class="material-icons font-options-toolbar">person_outline</i>
+                <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Time</span>
+                <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+            </div>
+            <mat-menu #afterMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+                <button mat-menu-item>Resumen</button>
+                <button mat-menu-item>Agregar</button>
+            </mat-menu>
+        </div>
+
+    </wMat-menu-group>
+
+
+    <div *ngIf="showToolbar" class="d-flex flex-row mr-auto justify-content-center align-items-center">
+        <mat-divider vertical role="separator"
+            style="height:40px;border:0.2px solid #C4C4C4;background-color: #C4C4C4;">
+        </mat-divider>
+        <div class="width-separator-avatar"></div>
+        <div role="button" [matMenuTriggerFor]="avatarMenu" #avatarMenuTrigger="matMenuTrigger">
+            <div class="d-flex flex-row justify-content-center  align-items-center">
+                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
+                    style="width: 68px;margin-left: 20px;margin-right: 5px;" alt="Avatar" />
+                <mat-icon class="material-icons font-options-avatar  ">keyboard_arrow_down</mat-icon>
+            </div>
+            <mat-menu #avatarMenu="matMenu" yPosition="above">
+                <button mat-menu-item>Resumen</button>
+                <button mat-menu-item>Agregar</button>
+            </mat-menu>
+        </div>
+    </div>
+
+    <!-- <span *ngIf="!showToolbar" class="example-spacer"></span> -->
+    <div *ngIf="!showToolbar">
+        <button mat-icon-button color="primary" (click)="togleSideNav()">
+            <mat-icon style="transform:scale(2)">menu</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>

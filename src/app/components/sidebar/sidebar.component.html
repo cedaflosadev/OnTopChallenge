@@ -1,0 +1,66 @@
+
+    <mat-nav-list>
+
+      <wMat-menu-group class="d-flex flex-column justify-content-around mx-auto " *ngIf="!showToolbar">
+        <div role="button" [matMenuTriggerFor]="aboveMenu" #abovemenuTrigger="matMenuTrigger"
+          [ngClass]="{'active':abovemenuTrigger.menuOpen, 'hover-toolbar mw-100 mx-auto':true}">
+          <div class="d-flex flex-row justify-content-center align-items-center">
+            <i class="material-icons font-options-toolbar">person_outline</i>
+            <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Contracts</span>
+            <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+            <mat-menu #aboveMenu="matMenu" yPosition="above" xPosition="before" [hasBackdrop]="false">
+              <button mat-menu-item>Item 1</button>
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+          </div>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="belowMenu" #belowMenuTrigger="matMenuTrigger"
+          [ngClass]="{'active':belowMenuTrigger.menuOpen, 'hover-toolbar mw-100 mx-auto':true}" class=" hover-toolbar">
+          <div class="d-flex flex-row justify-content-center align-items-center">
+            <i class="material-icons font-options-toolbar">person_outline</i>
+            <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Documents</span>
+            <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+          </div>
+          <mat-menu #belowMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="beforeMenu" #beforeMenuTrigger="matMenuTrigger"
+          [ngClass]="{'active':beforeMenuTrigger.menuOpen, 'hover-toolbar mw-100 mx-auto':true}" class=" hover-toolbar">
+          <div class="d-flex flex-row justify-content-center  align-items-center">
+            <i class="material-icons font-options-toolbar">person_outline</i>
+            <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Payout</span>
+            <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+          </div>
+          <mat-menu #beforeMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+
+        <div class="width-separator-options"></div>
+
+        <div role="button" [matMenuTriggerFor]="afterMenu" #afterMenuTrigger="matMenuTrigger"
+          [ngClass]="{'active':afterMenuTrigger.menuOpen, 'hover-toolbar mw-100 mx-auto':true}" class=" hover-toolbar">
+          <div class="d-flex flex-row justify-content-center  align-items-center">
+            <i class="material-icons font-options-toolbar">person_outline</i>
+            <span class="d-flex align-items-center font-options-toolbar title-options-toolbar ">Time</span>
+            <i class="material-icons  font-options-toolbar ">keyboard_arrow_down</i>
+          </div>
+          <mat-menu #afterMenu="matMenu" yPosition="above" [hasBackdrop]="false">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+
+      </wMat-menu-group>
+    </mat-nav-list>
+
+  

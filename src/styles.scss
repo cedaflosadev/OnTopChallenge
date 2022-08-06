@@ -1,1 +1,490 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$invoicer-primary: mat.define-palette((50 : #ffebee,
+      100 : #ffced4,
+      200 : #ffadb8,
+      300 : #ff8c9b,
+      400 : #ff7385,
+      500 : #ff5a70,
+      600 : #ff5268,
+      700 : #ff485d,
+      800 : #ff3f53,
+      900 : #ff2e41,
+      A100 : #ffffff,
+      A200 : #ffffff,
+      A400 : #ffdadd,
+      A700 : #ffc0c5,
+      contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+      )));
+$invoicer-accent: mat.define-palette((50 : #e7f9f0,
+      100 : #c3f1da,
+      200 : #9be7c1,
+      300 : #72dda8,
+      400 : #54d695,
+      500 : #36cf82,
+      600 : #30ca7a,
+      700 : #29c36f,
+      800 : #22bd65,
+      900 : #16b252,
+      A100 : #e5ffee,
+      A200 : #b2ffcd,
+      A400 : #7fffac,
+      A700 : #65ff9b,
+      contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+      )));
+
+// The warn palette is optional (defaults to red).
+$invoicer-warn: mat.define-palette((50 : #fdf3e8,
+      100 : #fbe2c6,
+      200 : #f9cea1,
+      300 : #f6ba7b,
+      400 : #f4ac5e,
+      500 : #f29d42,
+      600 : #f0953c,
+      700 : #ee8b33,
+      800 : #ec812b,
+      900 : #e86f1d,
+      A100 : #ffffff,
+      A200 : #fff2eb,
+      A400 : #ffd2b8,
+      A700 : #ffc29e,
+      contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+      )));
+
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$invoicer-theme: mat.define-light-theme((color: (primary: $invoicer-primary,
+        accent: $invoicer-accent,
+        warn: $invoicer-warn,
+      )));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($invoicer-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@import '../src/assets/styles/var.scss';
+
+html,
+body {
+  height: 100%;
+
+  // ::-webkit-scrollbar {
+  //   display: none;
+  // }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.position-icon-fab {
+  transform: scale(2) translateY(-10%)
+}
+
+.color-primary {
+  color: $color-primary;
+}
+
+.font-options-toolbar {
+  font-size: 1.05rem;
+}
+
+.font-options-avatar {
+  font-size: 2.3rem;
+  color: $color-light-grey;
+}
+
+.title-options-toolbar {
+  margin: auto 0.3rem;
+}
+
+.width-separator-options {
+  width: 3vw
+}
+
+.width-separator-avatar {
+  width: 2vw
+}
+
+.button-grey {
+  background-color: $color-grey;
+}
+
+.hover-toolbar {
+  padding-top: 2rem !important;
+  padding-bottom: 1.8rem !important;
+}
+
+.active {
+  color: $color-primary;
+  border-bottom: 5px solid $color-primary;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+::placeholder {
+  color: #C4C4C4;
+  opacity: 1;
+  
+}
+
+:-ms-input-placeholder {
+  color: #C4C4C4;
+}
+
+::-ms-input-placeholder {
+  color: #C4C4C4;
+}
+
+
+mat-datepicker-toggle {
+  color: white !important;
+}
+
+mat-sidenav-container {
+  height: calc(205vh - 119vh);
+
+
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.search-input {
+  vertical-align: middle;
+  margin-bottom: 13px;
+  margin-right: 10px;
+}
+
+.button-left {
+  height: 60px;
+  max-width: 111px !important;
+
+}
+
+.button-right {
+  height: 60px;
+  max-width: 192px !important;
+  margin-left: 10px;
+}
+
+
+.mat-header-row {
+  border: none;
+}
+
+.mat-table {
+  width: 100%;
+  border-spacing: 0 20px !important;
+  border: 0;
+
+
+}
+
+mat-header-cell,
+mat-cell {
+  justify-content: center;
+}
+
+.mat-header-cell {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: $color-black;
+}
+
+.mat-cell {
+  border-bottom: none;
+  border-top: none;
+
+}
+
+.mat-cell:first-child {
+  border-left: none;
+
+}
+
+.mat-cell:last-child {
+  border-right: none;
+
+}
+
+.mat-row {
+  background-color: #F9F9F9;
+  margin-top: 20px;
+  border-bottom: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+
+}
+
+.mat-column-name {
+  flex: 0 0 24%;
+}
+
+
+
+.mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-column-status {
+  flex: 0 0 24%;
+}
+
+.mat-select-arrow {
+  display: none;
+  
+}
+
+.mat-form-field-type-mat-select .mat-form-field-label,
+.mat-select-value {
+  color: $color-light-grey;
+}
+
+
+
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle;
+    
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  header .mat-table .mat-header-cell {
+    display: none;
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-cell:first-of-type,
+  .mat-header-cell:first-of-type,
+  .mat-footer-cell:first-of-type {
+    padding-left: 0;
+  }
+
+  .mat-table .mat-row {
+    
+    display: block;
+    padding: 10px 20px;
+    
+
+  }
+
+  .mat-row {
+    margin-top: 0px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: $color-white;
+  }
+
+  .mat-table .mat-cell :nth-child(even) {
+    background-color: #F9F9F9;
+    padding-top: 15px;
+
+  }
+
+  .mat-table .mat-cell:nth-child(odd) {
+    background-color: #F9F9F9;
+    padding-top: 15px;
+  }
+
+  .mat-table .mat-cell {
+    border-bottom: none;
+    display: block;
+    font-size: 1em;
+    padding: 15px;
+    text-align: right;
+    font-weight: bold;
+    background-color: $color-white;
+
+    
+  }
+
+  .mat-table .mat-cell:before {
+
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+
+    font-size: .85em;
+  }
+
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+    padding-bottom: 0px;
+  }
+
+  
+
+
+}
+
+.m-icon {
+  color: #C4C4C4;
+  font-size: 40px !important;
+
+}
+
+.m-icon-status {
+  font-size: 6px !important;
+}
+
+.baged-label {
+
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sucess-baged {
+  color: $color-sucess;
+  background: rgba(54, 207, 130, 0.18);
+}
+
+.pending-baged {
+  color: $color-warn;
+  background: rgba(242, 157, 66, 0.3);
+}
+
+
+td.mat-cell {
+  border-bottom-style: none;
+}
+
+th.mat-header-cell {
+  border-bottom-style: none;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: $color-white;
+}
+
+.filters-input-bg .mat-form-field-appearance-outline .mat-form-field-outline {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.fab {
+  width: 80px;
+  height: 80px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 #666;
+
+  font-size: 70px;
+  line-height: 70px;
+  color: white;
+  text-align: center;
+
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.fab:hover {
+  box-shadow: 0 6px 14px 0 #666;
+  transform: scale(1.05);
+}
+
+.mat-select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid;
+  margin: 0 4px;
+}
+
+.not-empty-select.mat-selected {
+  color: green !important;
+}
+
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
